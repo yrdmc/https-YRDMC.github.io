@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>情绪容器测试｜你容纳爱意的形状</title>
+<meta name="description" content="原创自评：用容器的意象，看看你接收、承载爱意的方式。20 道日常场景题，四个维度，七种容器。仅供娱乐，不构成心理诊断。">
+<style>
+/* ============ tokens ============ */
+:root{
+  --ink:#332e2a;
+  --ink-soft:#5c534b;
+  --ink-mute:#8d837a;
+  --line:rgba(84,68,54,.13);
+  --line-soft:rgba(84,68,54,.07);
+  --paper:#faf6ef;
+  --card:rgba(255,253,249,.86);
+  --clay:#c68b69;
+  --clay-deep:#a5653f;
+  --clay-soft:#e3bda5;
+  --water:#7ba8a2;
+  --water-deep:#4f7f7a;
+  --gold:#dfbc85;
+  --rose:#d8a6a0;
+  --radius:24px;
+  --shadow:0 22px 46px -30px rgba(88,62,40,.45), 0 2px 8px -4px rgba(88,62,40,.10);
+  --serif:"Source Han Serif SC","Noto Serif SC","Songti SC","STZhongsong","STSong","SimSun",Georgia,serif;
+  --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);
+  font-size:16px;line-height:1.78;letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+  text-wrap:pretty;
+  background-image:
+    radial-gradient(920px 540px at 6% -8%, rgba(214,164,134,.24), transparent 62%),
+    radial-gradient(760px 500px at 98% 2%, rgba(123,168,162,.15), transparent 60%),
+    radial-gradient(760px 520px at 50% 112%, rgba(223,188,133,.20), transparent 66%);
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:.015em;margin:0;line-height:1.28}
+p{margin:0}
+a{color:inherit}
+button{font-family:inherit}
+.svg-defs{position:absolute;width:0;height:0;overflow:hidden}
+.wrap{width:100%;max-width:1060px;margin:0 auto;padding:0 clamp(18px,4.2vw,34px)}
+
+/* ============ topbar ============ */
+.topbar{position:relative;z-index:5;padding:22px 0 6px}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}
+.brand-mark{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:12px;background:linear-gradient(150deg,#f3ddc7,#e6c3a6);box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),0 6px 14px -10px rgba(140,95,60,.9)}
+.brand-text{display:flex;flex-direction:column;line-height:1.2}
+.brand-text b{font-family:var(--serif);font-size:16px;font-weight:600;letter-spacing:.06em}
+.brand-text em{font-style:normal;font-size:9.5px;letter-spacing:.26em;color:var(--ink-mute);margin-top:3px}
+.topbar-nav{display:flex;align-items:center;gap:20px;font-size:13.5px;color:var(--ink-soft)}
+.topbar-nav a{text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent;transition:.2s;cursor:pointer}
+.topbar-nav a:hover{border-color:rgba(165,101,63,.5);color:var(--clay-deep)}
+.nav-tag{font-size:11.5px;letter-spacing:.08em;color:#a1856d;background:rgba(223,188,133,.22);padding:5px 11px;border-radius:99px;border:1px solid rgba(223,188,133,.45)}
+
+/* ============ views ============ */
+.view{display:none}
+.view.is-active{display:block;animation:viewIn .5s cubic-bezier(.22,.9,.3,1)}
+@keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ============ hero ============ */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(20px,4vw,54px);align-items:center;padding-block:clamp(26px,5vw,62px) clamp(30px,5vw,54px)}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.16em;color:#9d7f66;text-transform:uppercase;margin-bottom:20px}
+.eyebrow::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--clay);box-shadow:0 0 0 4px rgba(198,139,105,.18)}
+.hero h1{font-size:clamp(38px,6.4vw,62px);line-height:1.12;letter-spacing:.02em}
+.hero h1 .hl{position:relative;display:inline-block;color:var(--clay-deep)}
+.hero h1 .hl::after{content:"";position:absolute;left:2%;right:2%;bottom:.02em;height:.34em;background:linear-gradient(90deg,rgba(223,188,133,.55),rgba(223,188,133,.12));border-radius:99px;z-index:-1}
+.lede{margin-top:22px;font-size:clamp(15px,1.6vw,16.5px);color:var(--ink-soft);max-width:31em}
+.lede-sub{margin-top:14px;font-size:14px;color:var(--ink-mute);max-width:32em;line-height:1.85}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-note{margin-top:22px;font-size:12.5px;line-height:1.9;color:var(--ink-mute)}
+.hero-art{position:relative}
+.art-hero{width:100%;height:auto;display:block;filter:drop-shadow(0 26px 40px rgba(120,88,60,.13))}
+
+/* ============ buttons ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid transparent;border-radius:999px;padding:14px 26px;font-size:15px;font-weight:500;letter-spacing:.03em;cursor:pointer;transition:transform .22s cubic-bezier(.22,.9,.3,1),box-shadow .22s,background .22s,border-color .22s;min-height:48px;text-decoration:none;color:var(--ink);background:none}
+.btn:focus-visible{outline:2px solid rgba(165,101,63,.55);outline-offset:3px}
+.btn-primary{background:linear-gradient(132deg,#c98d6a,#af6d4a);color:#fff8f1;box-shadow:0 16px 30px -18px rgba(150,88,54,.9)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 36px -18px rgba(150,88,54,.95)}
+.btn-primary:active{transform:translateY(0)}
+.btn-ghost{background:rgba(255,253,249,.7);border-color:var(--line);color:var(--ink-soft)}
+.btn-ghost:hover{background:#fffdf9;border-color:rgba(84,68,54,.26);transform:translateY(-1px)}
+.btn-ghost:disabled{opacity:.38;cursor:not-allowed;transform:none}
+.btn-arrow{font-size:15px;transition:transform .22s}
+.btn-primary:hover .btn-arrow{transform:translateX(3px)}
+.btn-sm{padding:10px 18px;font-size:13.5px;min-height:40px}
+.link-btn{background:none;border:none;padding:0;font-size:13px;color:var(--clay-deep);cursor:pointer;border-bottom:1px solid rgba(165,101,63,.35);line-height:1.5}
+
+/* ============ sections ============ */
+.section{padding-block:clamp(34px,5vw,58px)}
+.section-head{margin-bottom:clamp(20px,3vw,32px)}
+.section-head h2{font-size:clamp(23px,3.2vw,31px)}
+.section-head p{margin-top:10px;color:var(--ink-mute);font-size:14px;max-width:42em}
+.kicker{font-size:11.5px;letter-spacing:.22em;color:#a2896f;text-transform:uppercase;margin-bottom:10px}
+
+.dim-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.dim-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px 20px;box-shadow:0 14px 30px -26px rgba(88,62,40,.55);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.dim-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.dim-card .dim-k{font-family:var(--serif);font-size:12px;letter-spacing:.2em;color:var(--clay);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.dim-card .dim-k::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+.dim-card h3{font-size:19px}
+.dim-card .dim-sub{font-size:12.5px;color:var(--water-deep);margin-top:6px;letter-spacing:.04em}
+.dim-card p{margin-top:12px;font-size:13.5px;color:var(--ink-soft);line-height:1.8}
+
+
+.type-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.type-card{background:rgba(255,253,249,.6);border:1px solid var(--line-soft);border-radius:18px;padding:14px 12px 16px;text-align:center;transition:.28s}
+.type-card:hover{background:#fffdf9;border-color:rgba(198,139,105,.35);transform:translateY(-3px)}
+.type-thumb{width:82px;height:82px;margin:0 auto 6px}
+.type-thumb svg{width:100%;height:100%;display:block}
+.type-card b{display:block;font-family:var(--serif);font-size:15.5px;font-weight:600}
+.type-card span{display:block;font-size:11.5px;color:var(--ink-mute);margin-top:5px;line-height:1.5}
+
+.note-band{margin-top:12px;padding:26px clamp(20px,3vw,30px);border-radius:22px;background:linear-gradient(160deg,rgba(255,253,249,.9),rgba(247,239,228,.7));border:1px solid var(--line);font-size:13px;color:var(--ink-soft);line-height:2}
+.note-band b{color:var(--ink)}
+.note-band .nb-title{font-family:var(--serif);font-size:16px;color:var(--ink);margin-bottom:8px;display:block}
+
+/* ============ quiz ============ */
+.quiz-shell{padding-bottom:40px}
+.quiz-head{position:sticky;top:0;z-index:20;padding:14px 0 12px;background:linear-gradient(180deg,rgba(250,246,239,.97) 55%,rgba(250,246,239,.80));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:10px 14px;flex-wrap:wrap;font-size:13px;color:var(--ink-mute);margin-bottom:9px}
+.quiz-meta b{font-family:var(--serif);font-size:16px;color:var(--clay-deep);font-weight:600}
+.progress{height:5px;border-radius:99px;background:rgba(84,68,54,.09);overflow:hidden}
+.progress-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#9dc3bc,#7ba8a2 60%,#cba17d);transition:width .45s cubic-bezier(.22,.9,.3,1)}
+.dots{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
+.dot{width:27px;height:24px;border-radius:8px;border:1px solid var(--line);background:rgba(255,253,249,.6);font-size:11px;color:var(--ink-mute);cursor:pointer;display:grid;place-items:center;padding:0;transition:.18s;font-variant-numeric:tabular-nums}
+.dot:hover{border-color:rgba(198,139,105,.5)}
+.dot.is-answered{background:rgba(123,168,162,.16);border-color:rgba(123,168,162,.4);color:var(--water-deep)}
+.dot.is-current{background:var(--clay);border-color:var(--clay);color:#fff;box-shadow:0 4px 10px -6px rgba(150,88,54,.9)}
+
+.q-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,4vw,40px);box-shadow:var(--shadow);margin-top:clamp(16px,3vw,26px);backdrop-filter:blur(8px)}
+.q-card.anim{animation:qIn .42s cubic-bezier(.22,.9,.3,1)}
+@keyframes qIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.q-eyebrow{font-size:11.5px;letter-spacing:.22em;color:#ad9376;margin-bottom:14px}
+.q-text{font-size:clamp(19px,2.5vw,23px);line-height:1.6;letter-spacing:.015em;color:var(--ink)}
+.options{display:grid;gap:9px;margin-top:clamp(18px,3vw,26px)}
+.option{display:flex;gap:13px;align-items:flex-start;width:100%;text-align:left;padding:15px 17px;background:#fffdf9;border:1px solid var(--line);border-radius:15px;font-size:15px;color:var(--ink-soft);cursor:pointer;transition:border-color .18s,background .18s,box-shadow .18s,transform .18s;line-height:1.65;min-height:54px}
+.option:hover{border-color:rgba(198,139,105,.45);transform:translateX(2px)}
+.option:focus-visible{outline:2px solid rgba(165,101,63,.5);outline-offset:2px}
+.option .idx{flex:none;width:23px;height:23px;border-radius:50%;border:1px solid rgba(84,68,54,.18);display:grid;place-items:center;font-size:11.5px;color:var(--ink-mute);margin-top:2px;transition:.18s}
+.option.is-selected{border-color:rgba(176,113,79,.7);background:linear-gradient(180deg,#fffaf4,#fdf0e5);color:var(--ink);box-shadow:0 12px 24px -22px rgba(150,88,54,.95)}
+.option.is-selected .idx{background:var(--clay);border-color:var(--clay);color:#fff}
+.quiz-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:clamp(18px,3vw,26px)}
+.quiz-nav .btn{min-width:110px}
+.q-alert{margin-top:16px;padding:0;border-radius:16px;background:rgba(216,168,140,.12);border:1px solid rgba(198,139,105,.28);font-size:13.5px;color:#8d5a3c;max-height:0;overflow:hidden;opacity:0;transition:.32s}
+.q-alert.show{max-height:320px;opacity:1;padding:16px 18px}
+.q-alert p{margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:5px 11px;border-radius:99px;border:1px solid rgba(165,101,63,.35);background:rgba(255,253,249,.85);color:var(--clay-deep);font-size:12.5px;cursor:pointer;transition:.18s}
+.chip:hover{background:var(--clay);color:#fff;border-color:var(--clay)}
+
+/* ============ result ============ */
+.result-shell{padding-block:clamp(24px,4vw,44px) 10px}
+.result-hero{display:grid;grid-template-columns:210px 1fr;gap:clamp(16px,3.6vw,38px);align-items:center;margin-bottom:clamp(18px,3vw,28px)}
+.result-art{width:100%;max-width:220px;margin:0 auto}
+.result-art svg{width:100%;height:auto;display:block;filter:drop-shadow(0 20px 30px rgba(120,88,60,.14))}
+.result-no{font-size:11.5px;letter-spacing:.22em;color:#ad9376;margin-bottom:8px}
+.result-name{font-size:clamp(30px,5vw,44px);line-height:1.2}
+.result-tag{font-family:var(--serif);font-size:clamp(15px,2vw,18px);color:var(--clay-deep);margin-top:8px;letter-spacing:.04em}
+.result-summary{margin-top:16px;font-size:15px;color:var(--ink-soft);line-height:1.9;max-width:33em}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,3.4vw,34px);box-shadow:var(--shadow);backdrop-filter:blur(8px);margin-bottom:14px}
+.panel-title{font-size:19px;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.panel-title::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--clay);flex:none;box-shadow:0 0 0 4px rgba(198,139,105,.16)}
+.bar-row+.bar-row{margin-top:20px}
+.bar-head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.bar-name{font-family:var(--serif);font-size:16.5px}
+.bar-sub{font-size:12px;color:var(--ink-mute)}
+.bar-val{margin-left:auto;font-size:13px;color:var(--clay-deep);font-weight:600;font-variant-numeric:tabular-nums}
+.bar-val i{font-style:normal;font-size:11px;color:var(--ink-mute);font-weight:400}
+.bar-track{height:8px;border-radius:99px;background:rgba(84,68,54,.075);overflow:hidden;margin:9px 0 10px}
+.bar-fill{height:100%;width:0;border-radius:99px;transition:width 1.05s cubic-bezier(.22,.9,.3,1)}
+.k-A .bar-fill{background:linear-gradient(90deg,#b7d6cf,#7ba8a2)}
+.k-B .bar-fill{background:linear-gradient(90deg,#93bcb6,#4f7f7a)}
+.k-C .bar-fill{background:linear-gradient(90deg,#e6c3a8,#c68b69)}
+.k-D .bar-fill{background:linear-gradient(90deg,#efd9b0,#d3a866)}
+.bar-note{font-size:13px;color:var(--ink-soft);line-height:1.85}
+.lv{display:inline-block;font-size:11px;padding:2px 9px;border-radius:99px;margin-right:9px;font-weight:600;letter-spacing:.04em;vertical-align:1px}
+.lv-high{background:rgba(123,168,162,.18);color:#42736d}
+.lv-mid{background:rgba(223,188,133,.3);color:#96702f}
+.lv-low{background:rgba(216,168,140,.24);color:#a05a34}
+
+.body-p{font-size:14.5px;color:var(--ink-soft);line-height:2}
+.body-p+.body-p{margin-top:14px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:11px}
+.list li{position:relative;padding-left:20px;font-size:14px;color:var(--ink-soft);line-height:1.85}
+.list li::before{content:"";position:absolute;left:2px;top:.72em;width:6px;height:6px;border-radius:50%;background:rgba(123,168,162,.85)}
+.list.warm li::before{background:rgba(198,139,105,.85)}
+.num-list{list-style:none;padding:0;margin:0;display:grid;gap:14px;counter-reset:n}
+.num-list li{position:relative;padding-left:36px;font-size:14px;color:var(--ink-soft);line-height:1.9;counter-increment:n}
+.num-list li::before{content:counter(n,decimal-leading-zero);position:absolute;left:0;top:1px;font-family:var(--serif);font-size:12px;color:var(--clay);background:rgba(198,139,105,.12);border-radius:8px;width:26px;height:22px;display:grid;place-items:center;letter-spacing:.04em}
+.quote{margin:16px 0 0;padding:26px clamp(20px,3vw,30px);border-left:3px solid var(--clay);background:linear-gradient(90deg,rgba(216,168,140,.13),rgba(216,168,140,0));border-radius:0 18px 18px 0;font-family:var(--serif);font-size:clamp(16px,2.2vw,19px);line-height:1.8;color:var(--ink)}
+.result-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.disclaimer{margin-top:22px;font-size:12px;color:var(--ink-mute);line-height:1.95;padding:18px 20px;border-radius:16px;background:rgba(255,253,249,.55);border:1px dashed rgba(84,68,54,.16)}
+
+/* ============ footer ============ */
+.site-foot{margin-top:clamp(30px,5vw,54px);padding:30px 0 46px;border-top:1px solid var(--line-soft)}
+.foot-inner{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:flex-start;font-size:12px;color:var(--ink-mute);line-height:1.95}
+.foot-inner .foot-left{max-width:34em}
+.foot-inner b{color:var(--ink-soft);font-weight:600}
+.foot-mark{display:flex;align-items:center;gap:8px;color:var(--ink-soft);font-family:var(--serif);font-size:13px;letter-spacing:.05em}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);background:rgba(51,46,42,.94);color:#fbf6ef;font-size:13px;padding:11px 20px;border-radius:99px;opacity:0;pointer-events:none;transition:.3s;z-index:80;box-shadow:0 16px 30px -16px rgba(0,0,0,.5)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ============ svg anim ============ */
+@keyframes ripPulse{0%{transform:scale(.65);opacity:.85}70%{opacity:.15}100%{transform:scale(1.25);opacity:0}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes twinkle{0%,100%{opacity:.25}50%{opacity:.9}}
+@keyframes steamUp{0%{opacity:0;transform:translateY(6px)}40%{opacity:.75}100%{opacity:0;transform:translateY(-12px)}}
+.rip{transform-box:fill-box;transform-origin:center}
+.rip-1{animation:ripPulse 5.2s ease-out infinite}
+.rip-2{animation:ripPulse 5.2s ease-out infinite 1.4s}
+.rip-3{animation:ripPulse 5.2s ease-out infinite 2.9s}
+.drift{animation:drift 7s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.spark{animation:twinkle 4.2s ease-in-out infinite}
+.spark.s2{animation-delay:1.3s}
+.spark.s3{animation-delay:2.6s}
+.steam{animation:steamUp 4.6s ease-in-out infinite}
+.steam.s2{animation-delay:1.6s}
+
+/* ============ responsive ============ */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:10px;padding-top:20px}
+  .hero-art{order:2;max-width:440px;margin:6px auto 0;padding:0 10px}
+  .hero-copy{order:1}
+  .dim-grid{grid-template-columns:1fr 1fr}
+  .result-hero{grid-template-columns:1fr;text-align:left;gap:8px}
+  .result-art{max-width:180px;margin:0 0 4px}
+  .grid-2{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  body{font-size:15.5px;line-height:1.75}
+  .quiz-head{padding:11px 0 9px}
+  .quiz-meta{font-size:12.5px}
+  #q-hint{flex:1 1 auto}
+  .dots{margin-top:9px}
+  .topbar{padding:16px 0 2px}
+  .topbar-nav{gap:14px;font-size:12.5px}
+  .nav-tag{display:none}
+  .hero h1{font-size:clamp(34px,10.5vw,44px)}
+  .hero-actions{width:100%}
+  .hero-actions .btn{flex:1 1 100%}
+  .lede-sub{font-size:13px}
+  .dim-grid{grid-template-columns:1fr}
+  .q-card{ border-radius:20px}
+  .option{font-size:14.5px;padding:14px 15px;gap:11px}
+  .q-text{font-size:19px}
+  .quiz-nav .btn{flex:1}
+  .quiz-nav .btn-ghost{flex:0 0 auto;min-width:96px;padding:14px 16px}
+  .dot{width:calc((100% - 45px)/10);min-width:0;height:23px;font-size:9.5px;border-radius:7px}
+  .result-actions .btn{flex:1 1 100%}
+  .type-grid{grid-template-columns:repeat(2,1fr)}
+  .type-thumb{width:66px;height:66px}
+  .bar-head{gap:6px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- 全局 SVG 渐变定义 -->
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gClay" x1="0" y1="0" x2=".9" y2="1">
+      <stop offset="0" stop-color="#eccdb6"/><stop offset=".5" stop-color="#d7a688"/><stop offset="1" stop-color="#bb8464"/>
+    </linearGradient>
+    <linearGradient id="gClayHero" x1=".1" y1="0" x2=".85" y2="1">
+      <stop offset="0" stop-color="#f0d5c0"/><stop offset=".42" stop-color="#dcae91"/><stop offset="1" stop-color="#bd8767"/>
+    </linearGradient>
+    <linearGradient id="gWater" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b6d8d1"/><stop offset="1" stop-color="#79a8a1"/>
+    </linearGradient>
+    <linearGradient id="gWaterHero" x1="0" y1="0" x2=".3" y2="1">
+      <stop offset="0" stop-color="#c3e0da"/><stop offset=".55" stop-color="#8fbab3"/><stop offset="1" stop-color="#6d9c96"/>
+    </linearGradient>
+    <radialGradient id="gDeep" cx=".42" cy=".3" r=".85">
+      <stop offset="0" stop-color="#7fb0a9"/><stop offset="1" stop-color="#3c6d68"/>
+    </radialGradient>
+    <linearGradient id="gGlass" x1=".2" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".82"/><stop offset=".55" stop-color="#dfeeec" stop-opacity=".42"/><stop offset="1" stop-color="#bcd3cf" stop-opacity=".55"/>
+    </linearGradient>
+    <radialGradient id="gGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffeccc" stop-opacity=".95"/><stop offset=".55" stop-color="#ffdfb4" stop-opacity=".35"/><stop offset="1" stop-color="#ffdfb4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gShadow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#7d5b42" stop-opacity=".26"/><stop offset="1" stop-color="#7d5b42" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gAura" cx=".5" cy=".45" r=".5">
+      <stop offset="0" stop-color="#f6dfc9" stop-opacity=".85"/><stop offset=".6" stop-color="#f2d9c4" stop-opacity=".35"/><stop offset="1" stop-color="#f2d9c4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" id="brand-home" href="#top">
+      <span class="brand-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 10h16c0 5.2-3.6 9-8 9s-8-3.8-8-9Z" fill="#b0714f" opacity=".82"/>
+          <path d="M6.5 10c0-3 2.4-5.4 5.5-5.4S17.5 7 17.5 10" fill="none" stroke="#a5653f" stroke-width="1.5" stroke-linecap="round" opacity=".55"/>
+          <circle cx="12" cy="5" r="1.6" fill="#7ba8a2"/>
+        </svg>
+      </span>
+      <span class="brand-text"><b>情绪容器</b><em>EMOTION VESSEL</em></span>
+    </a>
+    <nav class="topbar-nav">
+      <a href="#dims" data-scroll="dims">四个维度</a>
+      <a href="#types" data-scroll="types">七种容器</a>
+      <span class="nav-tag">娱乐自评 · 非诊断</span>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ==================== 首页 ==================== -->
+  <section class="view is-active" id="view-home">
+
+    <div class="wrap hero">
+      <div class="hero-copy">
+        <p class="eyebrow">原创自评 · 20 题 · 约 5 分钟</p>
+        <h1>你容纳爱意的<br><span class="hl">形状</span></h1>
+        <p class="lede">有人是敞口的浅盘，有人是看不见底的深潭。同一句「我在」，落进不同的容器里，会变成完全不同的温度。</p>
+        <p class="lede-sub">这个测试把「你怎么接收爱」拆成四件事：口开多大、里面多深、壁有多厚、底稳不稳。20 道日常场景题，最后落到七只容器中的一只。</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="btn-start">开始测试<span class="btn-arrow">→</span></button>
+          <a class="btn btn-ghost" href="#types" data-scroll="types">先看七种容器</a>
+        </div>
+        <p class="hero-note">本测试为原创娱乐自评，不构成心理诊断或专业建议。<br>建议凭第一直觉作答，不必反复权衡。</p>
+      </div>
+
+      <div class="hero-art">
+        <svg class="art-hero" viewBox="0 0 520 460" role="img" aria-label="一只盛着水的陶碗，水面有涟漪与微光">
+          <ellipse cx="262" cy="246" rx="204" ry="176" fill="url(#gAura)"/>
+          <g fill="none" stroke="#dcbc92" stroke-linecap="round" opacity=".5">
+            <path d="M126 214 A156 156 0 0 1 406 214" stroke-width="1.3"/>
+            <path d="M100 238 A186 186 0 0 1 432 238" stroke-width="1" opacity=".6"/>
+          </g>
+          <g class="drift" opacity=".95">
+            <path d="M262 118c7 9 11 14 11 19a11 11 0 1 1-22 0c0-5 4-10 11-19Z" fill="#e9caa4"/>
+            <ellipse cx="258" cy="140" rx="2.6" ry="3.6" fill="#fff" opacity=".85"/>
+          </g>
+          <ellipse cx="262" cy="400" rx="142" ry="17" fill="url(#gShadow)"/>
+          <path d="M104 258 C104 346 172 394 262 394 C352 394 420 346 420 258 Z" fill="url(#gClayHero)"/>
+          <path d="M148 302 C160 350 208 376 250 380" fill="none" stroke="#fff" stroke-opacity=".32" stroke-width="7" stroke-linecap="round"/>
+          <ellipse cx="262" cy="258" rx="158" ry="34" fill="#dfb193"/>
+          <ellipse cx="262" cy="258" rx="158" ry="34" fill="none" stroke="#b7825f" stroke-opacity=".32" stroke-width="2"/>
+          <ellipse cx="262" cy="262" rx="140" ry="27" fill="url(#gWaterHero)"/>
+          <circle cx="212" cy="256" r="30" fill="url(#gGlow)"/>
+          <circle cx="330" cy="268" r="22" fill="url(#gGlow)"/>
+          <g fill="none" stroke="#eefaf6" stroke-linecap="round">
+            <ellipse class="rip rip-1" cx="262" cy="262" rx="40" ry="8" stroke-opacity=".8" stroke-width="2"/>
+            <ellipse class="rip rip-2" cx="262" cy="262" rx="72" ry="14" stroke-opacity=".5" stroke-width="1.6"/>
+            <ellipse class="rip rip-3" cx="262" cy="262" rx="104" ry="20" stroke-opacity=".3" stroke-width="1.2"/>
+          </g>
+          <g fill="#f3d6ad">
+            <circle class="spark" cx="118" cy="152" r="3"/>
+            <circle class="spark s2" cx="410" cy="168" r="4"/>
+            <circle class="spark s3" cx="436" cy="306" r="2.6"/>
+            <circle class="spark s2" cx="92" cy="312" r="2.4"/>
+            <circle class="spark s3" cx="352" cy="118" r="2.2"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="wrap section" id="dims">
+      <div class="section-head">
+        <p class="kicker">Four Dimensions</p>
+        <h2>四件事，决定你容器的形状</h2>
+        <p>不是好坏之分，只是各自的进水口和出水口不同。四个维度各 5 道题，每题按程度记 1–4 分，最后落进七种容器中的一种。</p>
+      </div>
+      <div class="dim-grid">
+        <article class="dim-card">
+          <div class="dim-k">A</div>
+          <h3>开口度</h3>
+          <p class="dim-sub">爱意进得来吗</p>
+          <p>别人把好意递过来时，你让不让他进来。口小的人不是不需要，是「被照顾」这件事本身让人不自在。</p>
+        </article>
+        <article class="dim-card">
+          <div class="dim-k">B</div>
+          <h3>纵深</h3>
+          <p class="dim-sub">浓的装得住吗</p>
+          <p>冲突、眼泪、长时间的不确定一起涌进来时，你能不能在原地待住，而不是立刻想逃或炸开。</p>
+        </article>
+        <article class="dim-card">
+          <div class="dim-k">C</div>
+          <h3>壁厚</h3>
+          <p class="dim-sub">什么被挡在外面</p>
+          <p>你筛得多细：谁可以靠近、能知道你多少、界线画在哪里。壁厚保护你，也让一部分温度停在门外。</p>
+        </article>
+        <article class="dim-card">
+          <div class="dim-k">D</div>
+          <h3>底座</h3>
+          <p class="dim-sub">晃了还稳吗</p>
+          <p>关系一有小波动，你的水会不会整罐晃出去。底稳的人自带充电器，不必靠外部回应才能安静下来。</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="wrap section" id="types">
+      <div class="section-head">
+        <p class="kicker">Seven Vessels</p>
+        <h2>七只容器，没有一只是坏的</h2>
+        <p>浅盘装不久，深潭倒不出；玻璃罩隔音，砂锅太沉默。每一种形状都保护过你，也都在某个地方让你卡住。</p>
+      </div>
+      <div class="type-grid" id="type-grid"></div>
+    </div>
+
+    <div class="wrap section" style="padding-top:0">
+      <div class="note-band">
+        <span class="nb-title">开始之前，请先知道三件事</span>
+        <b>① 这是娱乐测试。</b>它由个人原创编写，没有经过心理测量学检验，不具备信度与效度，<b>不能</b>用于诊断依恋类型、人格障碍或任何心理健康状况。<br>
+        <b>② 结果不是标签。</b>同一个容器在不同的人、不同的关系里会有不同的样子。分数只描述「此刻的你」，不描述「永远的你」。<br>
+        <b>③ 不收集任何信息。</b>没有登录，没有支付，也不需要你填写任何个人资料。
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 答题页 ==================== -->
+  <section class="view" id="view-quiz">
+    <div class="quiz-head">
+      <div class="wrap quiz-head-inner">
+        <div class="quiz-meta">
+          <span><b id="q-cur">1</b> / 20</span>
+          <span id="q-hint">选最接近的那个，不用反复推敲</span>
+          <button class="link-btn" id="btn-quick" style="display:none">直接看结果 →</button>
+        </div>
+        <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="dots" id="dots"></div>
+      </div>
+    </div>
+
+    <div class="wrap quiz-shell">
+      <div class="q-card" id="q-card">
+        <p class="q-eyebrow" id="q-eyebrow">场景 01</p>
+        <h2 class="q-text" id="q-text"></h2>
+        <div class="options" id="options" role="radiogroup" aria-label="选项"></div>
+      </div>
+
+      <div class="quiz-nav">
+        <button class="btn btn-ghost" id="btn-prev">← 上一题</button>
+        <button class="btn btn-primary" id="btn-next">下一题 →</button>
+      </div>
+      <div class="q-alert" id="q-alert" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ==================== 结果页 ==================== -->
+  <section class="view" id="view-result">
+    <div class="wrap result-shell">
+      <p class="eyebrow">你的容器</p>
+
+      <div class="result-hero">
+        <div class="result-art" id="result-art"></div>
+        <div class="result-head">
+          <p class="result-no" id="result-no"></p>
+          <h2 class="result-name" id="result-name"></h2>
+          <p class="result-tag" id="result-tag"></p>
+          <p class="result-summary" id="result-summary"></p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 class="panel-title">你的容器剖面</h3>
+        <div id="bars"></div>
+      </div>
+
+      <div class="panel">
+        <h3 class="panel-title">你的容器长什么样</h3>
+        <div id="result-body"></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3 class="panel-title">你带进关系里的礼物</h3>
+          <ul class="list" id="result-gifts"></ul>
+        </div>
+        <div class="panel">
+          <h3 class="panel-title">最容易卡住的地方</h3>
+          <ul class="list warm" id="result-stuck"></ul>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 class="panel-title">可以试试的四件事</h3>
+        <ol class="num-list" id="result-actions"></ol>
+      </div>
+
+      <blockquote class="quote" id="result-quote"></blockquote>
+
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btn-edit">修改答案</button>
+        <button class="btn btn-ghost" id="btn-copy">复制我的结果</button>
+        <button class="btn btn-ghost" id="btn-restart">重新测试</button>
+        <button class="btn btn-ghost" id="btn-home">回到首页</button>
+      </div>
+
+      <p class="disclaimer" id="result-disclaimer"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-inner">
+    <div class="foot-left">
+      <b>情绪容器测试 · 你容纳爱意的形状</b><br>
+      原创娱乐自评内容，题目、计分与解读均为本页原创编写，不构成心理诊断、咨询或医疗建议。若你正经历持续的情绪困扰，请寻求专业心理服务。
+    </div>
+    <div class="foot-mark">
+      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 11h14c0 4.4-3.1 7.6-7 7.6S5 15.4 5 11Z" fill="#c68b69" opacity=".7"/>
+        <circle cx="12" cy="6.5" r="1.5" fill="#7ba8a2"/>
+      </svg>
+      <span>娱乐自评 · 不构成心理诊断</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============================================================
+     数据层
+     ============================================================ */
+
+  // 每题 4 个选项，v 为该选项在所属维度上的得分（1–4）。
+  // 选项顺序有意交错（部分题为倒序），避免「一路选第一个」也能得出极端分。
+  var QUESTIONS = [
+    /* ---- A 开口度 ---- */
+    { d:'A', t:'对方突然认真地说「我今天特别想夸夸你」，你的第一反应是——', o:[
+      { t:'手足无措，赶紧岔开话题', v:1 },
+      { t:'有点开心，又想让这段快点过去', v:2 },
+      { t:'笑着听完，把那几句话记在心里', v:3 },
+      { t:'很自然地接住，还想回夸他几句', v:4 }
+    ]},
+    { d:'A', t:'你生病躺在床上，对方说要请假来照顾你——', o:[
+      { t:'直接说「好」，还顺手报了想吃的', v:4 },
+      { t:'答应了，但一直觉得麻烦了他', v:3 },
+      { t:'犹豫很久，最后说「你别耽误工作」', v:2 },
+      { t:'一口拒绝，说自己完全能行', v:1 }
+    ]},
+    { d:'A', t:'收到一份不太合心意的礼物，你会——', o:[
+      { t:'只说「谢谢」，真实感受收起来', v:1 },
+      { t:'心里有点别扭，表面过得去', v:2 },
+      { t:'委婉说出自己其实更喜欢什么', v:3 },
+      { t:'先谢过心意，再笑着提个小要求', v:4 }
+    ]},
+    { d:'A', t:'对方说「我很需要你」，这句话让你——', o:[
+      { t:'有压力，下意识想退半步', v:1 },
+      { t:'觉得有点重，需要缓一缓', v:2 },
+      { t:'听得进去，但要想想怎么回应', v:3 },
+      { t:'很自然地说「我也在」', v:4 }
+    ]},
+    { d:'A', t:'一次很温柔的拥抱松开了，你通常——', o:[
+      { t:'会说「再抱一会儿」', v:4 },
+      { t:'说句轻松的话把它带过去', v:3 },
+      { t:'想多待一会儿，但没说出口', v:2 },
+      { t:'先松手，转身找点别的事做', v:1 }
+    ]},
+
+    /* ---- B 纵深 ---- */
+    { d:'B', t:'你们第一次吵得很凶，事后你一个人待着——', o:[
+      { t:'脑子一片空白，只想离开这段关系', v:1 },
+      { t:'反复回放每一句话，越想越乱', v:2 },
+      { t:'难受，但能睡着，想着明天再谈', v:3 },
+      { t:'允许自己难过，也相信能谈开', v:4 }
+    ]},
+    { d:'B', t:'对方在你面前崩溃大哭，你的状态是——', o:[
+      { t:'稳得住，能陪着，也知道该做什么', v:4 },
+      { t:'能陪，但自己也快撑不住了', v:3 },
+      { t:'心里发紧，手不知道往哪放', v:2 },
+      { t:'慌了，只想让他赶紧别哭', v:1 }
+    ]},
+    { d:'B', t:'关系里有种「说不清但一直在」的别扭，你会——', o:[
+      { t:'装作没事，等它自己过去', v:1 },
+      { t:'越想越焦虑，反复确认对方还爱不爱我', v:2 },
+      { t:'找个合适的时机把它提出来', v:3 },
+      { t:'能说清自己的感受，也给对方留空间', v:4 }
+    ]},
+    { d:'B', t:'对方的需要和你的需要撞上了——', o:[
+      { t:'先讲清各自真正要什么，再一起想办法', v:4 },
+      { t:'试着讲道理，找个折中的办法', v:3 },
+      { t:'硬碰硬，谁都不肯让', v:2 },
+      { t:'先满足他，然后自己憋着', v:1 }
+    ]},
+    { d:'B', t:'关系里出现「不确定」，你能忍多久——', o:[
+      { t:'几乎忍不了，必须马上要个答案', v:1 },
+      { t:'会不停试探，直到对方给回应', v:2 },
+      { t:'能等，但心里一直悬着', v:3 },
+      { t:'能待在里面，等事情慢慢清楚', v:4 }
+    ]},
+
+    /* ---- C 壁厚 ---- */
+    { d:'C', t:'刚认识不久，对方就说「我特别懂你」，你会——', o:[
+      { t:'挺开心，愿意跟着这份亲近走', v:1 },
+      { t:'有点被说中，也愿意多聊几句', v:2 },
+      { t:'保持礼貌，慢慢观察', v:3 },
+      { t:'立刻拉开距离，觉得哪里不对劲', v:4 }
+    ]},
+    { d:'C', t:'对方问起你的过去——', o:[
+      { t:'会说清「这部分我不想谈」', v:4 },
+      { t:'挑安全的讲，其他的绕开', v:3 },
+      { t:'讲一部分，看当时的气氛', v:2 },
+      { t:'基本都讲，没什么不能说的', v:1 }
+    ]},
+    { d:'C', t:'关于界线（私人时间、手机、朋友），你——', o:[
+      { t:'觉得谈这些有点见外', v:1 },
+      { t:'心里有想法，但很少说出口', v:2 },
+      { t:'会在合适的时候说清楚', v:3 },
+      { t:'宁愿提前把规则立好，省得麻烦', v:4 }
+    ]},
+    { d:'C', t:'别人对你好，你心里第一反应常常是——', o:[
+      { t:'先警惕，想看看他图什么', v:4 },
+      { t:'想着怎么还回去', v:3 },
+      { t:'开心，又怀疑是不是有事要说', v:2 },
+      { t:'很暖，直接收下', v:1 }
+    ]},
+    { d:'C', t:'关系变得太黏、太密的时候，你会——', o:[
+      { t:'很享受，越密越好', v:1 },
+      { t:'还好，暂时没什么不适', v:2 },
+      { t:'会想要一点自己的空间', v:3 },
+      { t:'明显往后退，需要喘口气', v:4 }
+    ]},
+
+    /* ---- D 底座 ---- */
+    { d:'D', t:'对方半天没回消息，你的心里——', o:[
+      { t:'基本不受影响，该做什么做什么', v:4 },
+      { t:'会看一眼，但不往坏处想', v:3 },
+      { t:'有点不安，反复看手机', v:2 },
+      { t:'开始设想最坏的可能', v:1 }
+    ]},
+    { d:'D', t:'对方拒绝了你的一个提议（比如今天不想出门）——', o:[
+      { t:'觉得他拒绝的是我这个人，很难受', v:1 },
+      { t:'有点失落，需要缓一阵', v:2 },
+      { t:'有点遗憾，但能接受', v:3 },
+      { t:'很正常，各人有各人的状态', v:4 }
+    ]},
+    { d:'D', t:'一整天独自待着，你通常——', o:[
+      { t:'很享受，能自己给自己充电', v:4 },
+      { t:'有自己的事做，比较安稳', v:3 },
+      { t:'过得去，但一直在刷手机', v:2 },
+      { t:'心慌，总想找人说说话', v:1 }
+    ]},
+    { d:'D', t:'情绪很差的时候，你最先会——', o:[
+      { t:'找人说，需要有人立刻接住我', v:1 },
+      { t:'发几条消息试探，等一个回应', v:2 },
+      { t:'自己待一会儿，再去做点什么', v:3 },
+      { t:'清楚自己需要什么，也能自己处理', v:4 }
+    ]},
+    { d:'D', t:'关系有点小波动的那晚，你的睡眠——', o:[
+      { t:'基本不受影响', v:4 },
+      { t:'有点影响，但还睡得着', v:3 },
+      { t:'会醒，反复想', v:2 },
+      { t:'几乎睡不着，脑子停不下来', v:1 }
+    ]}
+  ];
+
+  var DIMS = {
+    A: { title:'开口度', sub:'爱意进得来吗',
+      levels:{
+        high:'你不太设防。爱意递过来，你大多愿意接住，也敢开口要。这让温暖容易抵达你，也容易一次收下太多。',
+        mid:'你能接收，但要先确认安全。有人真心靠近时，你会先看一会儿，再决定把门打开多少。',
+        low:'你的口开得很小。不是不需要，而是「被接住」这件事本身让你不自在——你更习惯给出，不习惯收下。'
+      }},
+    B: { title:'纵深', sub:'浓的装得住吗',
+      levels:{
+        high:'你能装住很浓的东西。冲突、眼泪、长时间的不确定一起涌来，你也不至于被淹掉。',
+        mid:'你有一定的承载力，但需要时间消化。太急太密的情绪涌上来时，你会想先躲一下再面对。',
+        low:'你的容器偏浅。情绪一浓就容易满出来，你需要有人帮你分担，或者先离开现场缓一缓。'
+      }},
+    C: { title:'壁厚', sub:'什么被挡在外面',
+      levels:{
+        high:'你的壁很厚，筛得很细。它保护过你很多次，也让一些本来可以进来的东西停在了门外。',
+        mid:'你有边界，但不封闭。该挡的挡得住，该开的时候也愿意开一条缝。',
+        low:'你几乎是敞开的。别人很容易走进来，也很容易不小心踩到你——包括那些并不打算留下的人。'
+      }},
+    D: { title:'底座', sub:'晃了还稳吗',
+      levels:{
+        high:'你的底很稳。对方的状态起伏不太会直接掀翻你，你有自己的重心。',
+        mid:'你的底基本稳，但在意的人一有变化，水还是会晃一晃。',
+        low:'你的底在晃。关系里的一点风吹草动，都会让整罐水动起来，需要靠外面的回应才安静得下来。'
+      }}
+  };
+
+  var TYPES = {
+    hotspring: {
+      no:'01', name:'温泉池', tag:'能接住，也能化开',
+      summary:'你的口开得很大，池子也不浅，底还稳。别人递过来的东西你大多接得住，而且能在里面慢慢化开——不会被淹，也不会让它凉掉。',
+      body:[
+        '你不太害怕「太多」。浓烈的表达、突如其来的眼泪、漫长的不确定，你都能在里面待一会儿。你的稳定不是硬撑出来的，而是你真的知道：情绪会来，也会走，池子里的水会重新变清。',
+        '也正因为你接得住，别人容易把更多东西放进来。要留意的是——温泉池也会被过度取用。你不需要一直做所有人的容器，也不必用「我没事」来维持那个稳定的人设。'
+      ],
+      gifts:['冲突里还能保持温度，不急着分对错','别人靠近你会觉得安全，愿意说真话','情绪来得很急时，你也很少真的失控'],
+      stuck:['容易接下超出自己份额的情绪，还觉得理所当然','别人习惯了你的稳定，就忘了你也会累','偶尔用「我没事」把真实的疲惫盖过去'],
+      actions:[
+        '每周留一段「不接任何人」的时间，提前说出来，而不是临时消失。',
+        '在关系里练习一句完整的话：「我现在接不住这个，晚点再聊。」',
+        '回想一次你明明很累却还是接住了的时刻，看看那次你付出了什么。',
+        '让别人也有机会照顾你——具体地提一个请求，而不是等对方猜。'
+      ],
+      quote:'你可以是温泉，但不必二十四小时营业。'
+    },
+    deeppool: {
+      no:'02', name:'深潭', tag:'心里很深，嘴上很浅',
+      summary:'你的口不大，里面却很深。你不是不在意——恰恰相反，你在意得很沉。只是那些话到嘴边，总要先在心里过很多遍，最后只剩一句「还好」。',
+      body:[
+        '你能装住很浓的东西，而且装得很久。别人以为你没什么波动，其实潭底一直在动。你更习惯用做事、记住细节、默默把一切安排好来表达，而不是说出来。',
+        '麻烦的地方在于：对方看不见潭底。你给出的爱是深水，但表面太平静，很容易被读成「没那么在乎」。你不是不表达，你只是把表达换成了别人看不懂的方言。'
+      ],
+      gifts:['情绪承载力强，不容易当场崩掉','记得住别人随口说过的话','混乱的时候，你是那个还站得住的人'],
+      stuck:['期待对方「应该懂」，然后把失望攒起来','把需要藏得很好，等着被猜中','积太久之后一次性爆发，吓到对方也吓到自己'],
+      actions:[
+        '每天说一句「露出来」的话：今天想你了 / 刚才有点难过。不用长。',
+        '把「你应该知道」换成「我没说，但你愿意听吗」。',
+        '给自己设一个积压上限：连续三天有没说出口的事，就挑一件讲出来。',
+        '允许自己讲得笨一点。说得不好，比不说要好得多。'
+      ],
+      quote:'深不是问题，封口才是。'
+    },
+    cloche: {
+      no:'03', name:'玻璃罩', tag:'保护得很好，也隔得很好',
+      summary:'你的容器外面有一层透明的罩子。看得见，摸不到。你不是不想要爱，你只是太清楚受伤是什么感觉，所以先把门关小一点。',
+      body:[
+        '你的壁很厚，筛得很细。谁可以靠近、能靠多近、可以知道多少，你心里有一张很清楚的表。这让你很少被消耗，也很少被真正看见。',
+        '罩子最麻烦的地方是——它是透明的。别人以为已经进来了，其实还在外面。你也会困惑：为什么明明有人陪着，还是觉得孤单。'
+      ],
+      gifts:['边界清楚，不容易被拖进糟糕的关系','观察力好，能比大多数人更早察觉不对劲','独处能力强，一个人也能过得像样'],
+      stuck:['用「我没事」把关心挡回去，然后责怪没人关心','把试探当成了解，把靠近当成风险','很希望被懂，又不给任何人懂你的材料'],
+      actions:[
+        '每周做一次「开一条缝」：讲一件你平时不会讲的小事。',
+        '把罩子改成门——门是可以开的，也可以关，不必一直锁着。',
+        '想后退的时候补一句：「我需要缓一下，不是不要你。」',
+        '试着接受一次不需要立刻回报的好意，什么都不还。'
+      ],
+      quote:'罩子保护了你，也把你留在了里面。'
+    },
+    vase: {
+      no:'04', name:'细颈陶瓶', tag:'慢一点，但很认真',
+      summary:'你的瓶口很细，一次只能进一点点。但进来的东西会待很久。你不擅长热闹的亲密，擅长的是长期、缓慢、不喧哗的那一种。',
+      body:[
+        '你需要时间。不是欲擒故纵，而是你的系统本来就这么运作：先观察，再确认，然后才允许自己靠近。一旦确认，你给出的浓度常常超出对方的预期。',
+        '你的风险不在「进不来」，而在「进得太慢，对方等不及走了」。也可能相反：进来的太少，你就说服自己「这样也够了」。'
+      ],
+      gifts:['慢热但长情，温度掉得很慢','不轻易许诺，许诺了就算数','对关系的质地很敏感，闻得出变味'],
+      stuck:['用「再等等」推迟所有靠近','把谨慎误当成不喜欢，错过本来可以的','等对方撤退了，才发现自己早就在意'],
+      actions:[
+        '把「再观察一阵」换成一个具体期限：比如「再聊三次，我就告诉他我的感觉」。',
+        '允许自己在还没完全确定时，先说一句真话。',
+        '给想说的话设一个出口：24 小时内说出去，不等完美时机。',
+        '每次想退，问自己一句：这次是慢，还是怕。'
+      ],
+      quote:'细口不是缺点，但瓶口也需要偶尔打开透气。'
+    },
+    dish: {
+      no:'05', name:'敞口浅盘', tag:'什么都收下，就是装不久',
+      summary:'你的口大得惊人，几乎什么都愿意接。问题是它太浅了——爱意进来得很快，也流走得很快。你常在「被爱着」和「又空了」之间来回。',
+      body:[
+        '你很开放，几乎不设防。别人对你好，你会立刻全盘接受，也很容易被一个人打动。你的热情是真的，你的失望也是真的。',
+        '浅不是不在乎，是容量还没长出来。你接收得多，消化得少；感受来得猛，去得也快，于是总需要下一次确认来续上温度。'
+      ],
+      gifts:['真诚、不设防，和你相处的人会松下来','感受力强，能迅速接住空气里的变化','愿意先给出善意，不等对方先动'],
+      stuck:['靠新鲜感维持安全感，一平淡就慌','一有波动就想换一个容器，而不是修一修','把「被填满」当成「被爱」'],
+      actions:[
+        '练习「慢一拍」：被打动时，先在心里放一天，再做决定。',
+        '关系有波动时先问自己：我需要的是他，还是需要被填满。',
+        '找一件能独立完成、有积累感的事——容量是靠时间长的，不是靠换人。',
+        '把「你爱我吗」换成「我今天想和你聊十分钟」。'
+      ],
+      quote:'浅盘也能盛水，只是别被每一次涟漪带走。'
+    },
+    jar: {
+      no:'06', name:'漏底陶罐', tag:'一直在要，一直在漏',
+      summary:'你的口很开，底却不太稳。爱意进来的时候你能感觉到，但它留不住——过一会儿，你又开始怀疑它是不是真的来过。',
+      body:[
+        '你接收爱的能力其实很强，只是底座在晃。对方一句冷淡、一次晚回，就能让整罐水晃出去。于是你需要反复确认，反复被重新填满。',
+        '这不是贪心，是容器还没被稳住。你缺的往往不是更多的爱，而是一个能自己站住的底。'
+      ],
+      gifts:['情感浓度高，爱得很用力','对关系的变化极其敏锐，几乎不会漏掉','愿意为对方调整自己'],
+      stuck:['用不断确认来换取短暂安心','把对方的疲惫读成不爱，然后更用力地要','越怕失去，越容易把人推远'],
+      actions:[
+        '建一个「自己给自己」的稳定来源：固定的运动、写字、做饭，任何不依赖他人的东西。',
+        '焦虑上来时，先等二十分钟，再发那条消息。',
+        '把「你是不是不爱我了」换成「我现在有点不安，能抱一下吗」。',
+        '记下每一次「他没回消息但其实没事」，下次慌的时候拿出来看。'
+      ],
+      quote:'你需要的不是更多的水，是一个不漏的底。'
+    },
+    pot: {
+      no:'07', name:'温吞砂锅', tag:'不烫，但一直温着',
+      summary:'你的容器不张扬：口不大，壁不薄，底很稳。你给的爱不是烟花，是灶上一直温着的汤——不惊艳，但很久。',
+      body:[
+        '在关系里你更像那个「维持者」：记得交水电费，记得对方不吃香菜，记得把话说在不伤人的位置上。你不常有剧烈的表达，但你的稳定是别人可以靠着的东西。',
+        '风险在于「温」会变成「闷」。你不太主动提要求，也很少说自己不满，久了就变成一种很安静的委屈——等对方发现时，它已经攒成了一句话：算了。'
+      ],
+      gifts:['稳定、可靠，是可以长期依靠的那种人','冲突里不容易失控，能守住底线','能把爱落在日常里，而不是只落在嘴上'],
+      stuck:['用「还行」覆盖真实的失望','把忍让当成体贴，把沉默当成修养','等到忍不下去时，已经攒了太久'],
+      actions:[
+        '每周说一次具体的想要，哪怕很小：「这周末我想去那家店。」',
+        '不满还在小的时候就说出来，别等它长成一个结论。',
+        '给关系加一点「不实用」的东西：一次没计划的出门，一句没来由的夸奖。',
+        '定期检查：你是在温和，还是在回避。'
+      ],
+      quote:'温水很好，但锅也需要有人掀开盖子看看。'
+    }
+  };
+
+  var TYPE_ORDER = ['hotspring','deeppool','cloche','vase','dish','jar','pot'];
+  var LV_TEXT = { high:'偏高', mid:'中等', low:'偏低' };
+
+  /* ============================================================
+     容器插画（原创 SVG，参数化拼接）
+     ============================================================ */
+
+  function vesselSVG(key) {
+    var head = '<svg viewBox="26 58 188 174" aria-hidden="true" focusable="false">';
+    var tail = '</svg>';
+    var shadow = '<ellipse cx="120" cy="206" rx="70" ry="9" fill="url(#gShadow)"/>';
+    var s;
+
+    switch (key) {
+      case 'hotspring':
+        s = shadow
+          + '<ellipse cx="120" cy="130" rx="80" ry="52" fill="url(#gGlow)" opacity=".55"/>'
+          + '<path d="M44 132 C44 176 76 200 120 200 C164 200 196 176 196 132 Z" fill="url(#gClay)"/>'
+          + '<path d="M52 150 C58 180 84 194 112 197" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="5" stroke-linecap="round"/>'
+          + '<ellipse cx="120" cy="132" rx="76" ry="15" fill="#e0b295"/>'
+          + '<ellipse cx="120" cy="132" rx="76" ry="15" fill="none" stroke="#b7825f" stroke-opacity=".35" stroke-width="1.8"/>'
+          + '<ellipse cx="120" cy="133" rx="66" ry="11" fill="url(#gWater)"/>'
+          + '<g fill="none" stroke="#eefaf6" stroke-linecap="round">'
+          + '<ellipse class="rip rip-1" cx="120" cy="133" rx="20" ry="4" stroke-opacity=".8" stroke-width="1.6"/>'
+          + '<ellipse class="rip rip-2" cx="120" cy="133" rx="40" ry="7" stroke-opacity=".45" stroke-width="1.3"/>'
+          + '</g>'
+          + '<g fill="none" stroke="#e4c59b" stroke-width="2.6" stroke-linecap="round">'
+          + '<path class="steam" d="M92 112 C86 100 96 92 90 78"/>'
+          + '<path class="steam s2" d="M120 106 C114 94 124 86 118 72"/>'
+          + '<path class="steam" d="M148 112 C142 100 152 92 146 78" opacity=".7"/>'
+          + '</g>';
+        break;
+      case 'deeppool':
+        s = shadow
+          + '<path d="M84 98 C76 132 70 166 82 188 C90 202 150 202 158 188 C170 166 164 132 156 98 Z" fill="url(#gClay)"/>'
+          + '<path d="M90 114 C84 146 80 172 88 190" fill="none" stroke="#fff" stroke-opacity=".26" stroke-width="5" stroke-linecap="round"/>'
+          + '<ellipse cx="120" cy="98" rx="38" ry="11" fill="#d9a98c"/>'
+          + '<ellipse cx="120" cy="98" rx="38" ry="11" fill="none" stroke="#b7825f" stroke-opacity=".3" stroke-width="1.6"/>'
+          + '<ellipse cx="120" cy="99" rx="31" ry="8.5" fill="url(#gDeep)"/>'
+          + '<ellipse cx="120" cy="102" rx="22" ry="5.6" fill="#2f605b" opacity=".5"/>'
+          + '<ellipse cx="120" cy="105" rx="12" ry="3" fill="#26504c" opacity=".45"/>'
+          + '<ellipse cx="106" cy="97" rx="8" ry="2" fill="#d6eeea" opacity=".55"/>'
+          + '<path d="M120 128 L120 190" stroke="#8fc3bc" stroke-opacity=".18" stroke-width="2"/>'
+          + '<circle cx="120" cy="156" r="20" fill="url(#gGlow)" opacity=".3"/>';
+        break;
+      case 'cloche':
+        s = shadow
+          + '<ellipse cx="120" cy="152" rx="34" ry="30" fill="url(#gGlow)" opacity=".7"/>'
+          + '<path d="M84 146 C86 172 102 186 120 186 C138 186 154 172 156 146 Z" fill="url(#gClay)"/>'
+          + '<ellipse cx="120" cy="146" rx="38" ry="9" fill="#e0b295"/>'
+          + '<ellipse cx="120" cy="147" rx="30" ry="6.5" fill="url(#gWater)" opacity=".8"/>'
+          + '<circle cx="120" cy="148" r="14" fill="url(#gGlow)"/>'
+          + '<path d="M62 148 A58 58 0 0 1 178 148" fill="url(#gGlass)" stroke="#b6cbc7" stroke-opacity=".75" stroke-width="2"/>'
+          + '<ellipse cx="120" cy="148" rx="58" ry="10" fill="none" stroke="#b6cbc7" stroke-opacity=".5" stroke-width="1.8"/>'
+          + '<circle cx="120" cy="87" r="5.5" fill="#cfdcd9" stroke="#aec4c0" stroke-opacity=".6"/>'
+          + '<path d="M86 128 C90 108 104 98 116 96" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="4" stroke-linecap="round"/>';
+        break;
+      case 'vase':
+        s = shadow
+          + '<path d="M107 84 L111 118 C88 128 80 156 90 178 C98 195 142 195 150 178 C160 156 152 128 129 118 L133 84 Z" fill="url(#gClay)"/>'
+          + '<path d="M95 150 C96 172 106 184 118 188" fill="none" stroke="#fff" stroke-opacity=".26" stroke-width="4.5" stroke-linecap="round"/>'
+          + '<ellipse cx="120" cy="84" rx="14" ry="5" fill="#d3a184"/>'
+          + '<ellipse cx="120" cy="84" rx="9" ry="3" fill="#5f8f89"/>'
+          + '<ellipse cx="120" cy="160" rx="26" ry="9" fill="url(#gWater)" opacity=".85"/>'
+          + '<circle cx="120" cy="150" r="16" fill="url(#gGlow)" opacity=".5"/>';
+        break;
+      case 'dish':
+        s = '<ellipse cx="120" cy="196" rx="86" ry="9" fill="url(#gShadow)"/>'
+          + '<path d="M36 140 C40 168 76 184 120 184 C164 184 200 168 204 140 Z" fill="url(#gClay)"/>'
+          + '<path d="M50 150 C56 170 82 179 110 181" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>'
+          + '<ellipse cx="120" cy="140" rx="84" ry="16" fill="#e0b295"/>'
+          + '<ellipse cx="120" cy="140" rx="84" ry="16" fill="none" stroke="#b7825f" stroke-opacity=".32" stroke-width="1.8"/>'
+          + '<ellipse cx="120" cy="141" rx="74" ry="12" fill="url(#gWater)"/>'
+          + '<g fill="none" stroke="#eefaf6" stroke-linecap="round">'
+          + '<ellipse class="rip rip-1" cx="120" cy="141" rx="24" ry="4" stroke-opacity=".75" stroke-width="1.6"/>'
+          + '<ellipse class="rip rip-3" cx="120" cy="141" rx="50" ry="8" stroke-opacity=".4" stroke-width="1.3"/>'
+          + '</g>';
+        break;
+      case 'jar':
+        s = '<ellipse cx="120" cy="204" rx="66" ry="9" fill="url(#gShadow)"/>'
+          + '<path d="M92 100 C80 128 76 168 92 188 C106 202 134 202 148 188 C164 168 160 128 148 100 Z" fill="url(#gClay)"/>'
+          + '<path d="M100 120 C94 148 92 172 100 186" fill="none" stroke="#fff" stroke-opacity=".26" stroke-width="5" stroke-linecap="round"/>'
+          + '<ellipse cx="120" cy="100" rx="28" ry="8" fill="#d3a184"/>'
+          + '<ellipse cx="120" cy="101" rx="21" ry="5.5" fill="url(#gWater)" opacity=".9"/>'
+          + '<path d="M108 186 L116 192 L111 196 L120 201 L115 205" fill="none" stroke="#7d5136" stroke-width="2.4" stroke-opacity=".8" stroke-linecap="round" stroke-linejoin="round"/>'
+          + '<path d="M96 170 C110 176 130 176 144 170" fill="none" stroke="#9ecfc8" stroke-opacity=".35" stroke-width="2"/>'
+          + '<path d="M121 205 C121 211 124 214 121 218" fill="none" stroke="#7ba8a2" stroke-width="3" stroke-linecap="round" opacity=".85"/>'
+          + '<circle cx="120" cy="224" r="2.8" fill="#7ba8a2" opacity=".7"/>';
+        break;
+      default: /* pot */
+        s = shadow
+          + '<path d="M74 132 C74 176 92 196 120 196 C148 196 166 176 166 132 Z" fill="url(#gClay)"/>'
+          + '<path d="M84 152 C86 176 98 188 112 192" fill="none" stroke="#fff" stroke-opacity=".26" stroke-width="4.5" stroke-linecap="round"/>'
+          + '<ellipse cx="120" cy="132" rx="50" ry="11" fill="#d9a98c"/>'
+          + '<ellipse cx="120" cy="133" rx="42" ry="8" fill="#6f9e98" opacity=".5"/>'
+          + '<g transform="rotate(-9 140 118)">'
+          + '<ellipse cx="122" cy="120" rx="46" ry="10" fill="#e2b79a" stroke="#b7825f" stroke-opacity=".35" stroke-width="1.6"/>'
+          + '<ellipse cx="122" cy="118" rx="46" ry="10" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.4"/>'
+          + '<circle cx="122" cy="112" r="5" fill="#c98f6d"/>'
+          + '</g>'
+          + '<g fill="none" stroke="#e4c59b" stroke-width="2.4" stroke-linecap="round">'
+          + '<path class="steam" d="M104 100 C98 88 108 80 102 68"/>'
+          + '<path class="steam s2" d="M132 98 C126 86 136 78 130 66" opacity=".8"/>'
+          + '</g>';
+    }
+    return head + s + tail;
+  }
+
+  /* ============================================================
+     状态与元素
+     ============================================================ */
+
+  var N = QUESTIONS.length;
+  var answers = new Array(N).fill(null);
+  var index = 0;
+  var lastResult = null;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var views = { home: $('view-home'), quiz: $('view-quiz'), result: $('view-result') };
+  var els = {
+    qCur: $('q-cur'), qHint: $('q-hint'), fill: $('progress-fill'), dots: $('dots'),
+    card: $('q-card'), eyebrow: $('q-eyebrow'), text: $('q-text'), options: $('options'),
+    prev: $('btn-prev'), next: $('btn-next'), alert: $('q-alert'), quick: $('btn-quick'),
+    toast: $('toast')
+  };
+
+  function setView(name) {
+    Object.keys(views).forEach(function (k) {
+      views[k].classList.toggle('is-active', k === name);
+    });
+    document.body.setAttribute('data-view', name);
+    window.scrollTo(0, 0);
+  }
+
+  var toastTimer = null;
+  function toast(msg) {
+    els.toast.textContent = msg;
+    els.toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { els.toast.classList.remove('show'); }, 2000);
+  }
+
+  /* ============================================================
+     首页：类型卡片
+     ============================================================ */
+
+  function renderTypeGrid() {
+    $('type-grid').innerHTML = TYPE_ORDER.map(function (k) {
+      var t = TYPES[k];
+      return '<article class="type-card">'
+        + '<div class="type-thumb">' + vesselSVG(k) + '</div>'
+        + '<b>' + t.name + '</b>'
+        + '<span>' + t.tag + '</span>'
+        + '</article>';
+    }).join('');
+  }
+
+  /* ============================================================
+     答题页
+     ============================================================ */
+
+  function answeredCount() {
+    return answers.filter(function (a) { return a !== null; }).length;
+  }
+
+  function renderDots() {
+    var html = '';
+    for (var i = 0; i < N; i++) {
+      var cls = 'dot';
+      if (answers[i] !== null) cls += ' is-answered';
+      if (i === index) cls += ' is-current';
+      html += '<button type="button" class="' + cls + '" data-jump="' + i + '" aria-label="第 ' + (i + 1) + ' 题">' + (i + 1) + '</button>';
+    }
+    els.dots.innerHTML = html;
+  }
+
+  function renderQuestion(animate) {
+    var q = QUESTIONS[index];
+    els.qCur.textContent = index + 1;
+    els.eyebrow.textContent = '场景 ' + String(index + 1).padStart(2, '0');
+    els.text.textContent = q.t;
+
+    var chosen = answers[index];
+    var html = '';
+    for (var i = 0; i < q.o.length; i++) {
+      var sel = chosen === i ? ' is-selected' : '';
+      html += '<button type="button" class="option' + sel + '" role="radio" aria-checked="' + (chosen === i) + '" data-opt="' + i + '">'
+        + '<span class="idx">' + 'ABCD'.charAt(i) + '</span>'
+        + '<span class="opt-t">' + q.o[i].t + '</span>'
+        + '</button>';
+    }
+    els.options.innerHTML = html;
+
+    els.fill.style.width = (answeredCount() / N * 100) + '%';
+    els.prev.disabled = index === 0;
+    els.next.textContent = index === N - 1 ? (lastResult ? '更新我的结果' : '生成我的容器') : '下一题 →';
+    els.qHint.textContent = index === N - 1
+      ? '答完这一题就可以看结果'
+      : (lastResult && answeredCount() === N ? '改完点右侧「更新结果」就行' : '选最接近的那个，不用反复推敲');
+
+    var done = answeredCount() === N;
+    els.quick.style.display = done ? 'inline-block' : 'none';
+    els.quick.textContent = lastResult ? '更新结果 →' : '直接看结果 →';
+
+    if (animate) {
+      els.card.classList.remove('anim');
+      void els.card.offsetWidth;
+      els.card.classList.add('anim');
+    }
+    renderDots();
+    hideAlert();
+  }
+
+  function hideAlert() {
+    els.alert.classList.remove('show');
+    els.alert.innerHTML = '';
+  }
+
+  function showAlert(missing) {
+    var chips = missing.map(function (i) {
+      return '<button type="button" class="chip" data-jump="' + i + '">第 ' + (i + 1) + ' 题</button>';
+    }).join('');
+    els.alert.innerHTML = '<p>还有 <b>' + missing.length + '</b> 题没有作答，点下面的题号可以直接回去补上：</p><div class="chips">' + chips + '</div>';
+    els.alert.classList.add('show');
+    els.alert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function select(i) {
+    var wasEmpty = answers[index] === null;
+    answers[index] = i;
+    var btns = els.options.querySelectorAll('.option');
+    for (var k = 0; k < btns.length; k++) {
+      var on = Number(btns[k].getAttribute('data-opt')) === i;
+      btns[k].classList.toggle('is-selected', on);
+      btns[k].setAttribute('aria-checked', on ? 'true' : 'false');
+    }
+    els.fill.style.width = (answeredCount() / N * 100) + '%';
+    if (answeredCount() === N) els.quick.style.display = 'inline-block';
+    renderDots();
+
+    // 首次作答自动进入下一题（回头修改时不跳，避免打断）
+    if (wasEmpty && index < N - 1) {
+      setTimeout(function () {
+        if (answers[index] !== null && index < N - 1) go(index + 1);
+      }, 300);
+    }
+  }
+
+  function go(i) {
+    if (i < 0 || i >= N) return;
+    index = i;
+    renderQuestion(true);
+    var top = document.querySelector('.quiz-head');
+    if (top) {
+      var y = top.getBoundingClientRect().top + window.pageYOffset - 4;
+      if (window.pageYOffset > y) window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }
+
+  function submit() {
+    var missing = [];
+    for (var i = 0; i < N; i++) if (answers[i] === null) missing.push(i);
+    if (missing.length) {
+      if (index !== N - 1) {
+        // 从答题卡之外的入口提交时，先跳到最后一题再提示
+        index = N - 1;
+        renderQuestion(true);
+      }
+      showAlert(missing);
+      return;
+    }
+    var res = compute();
+    lastResult = res;
+    renderResult(res);
+    setView('result');
+  }
+
+  /* ============================================================
+     计分（纯函数，结果只由答案决定）
+     ============================================================ */
+
+  function compute() {
+    var sums = { A: 0, B: 0, C: 0, D: 0 };
+    for (var i = 0; i < N; i++) {
+      var q = QUESTIONS[i];
+      sums[q.d] += q.o[answers[i]].v;
+    }
+    var levels = {};
+    ['A', 'B', 'C', 'D'].forEach(function (k) {
+      levels[k] = sums[k] >= 13 ? 'high' : (sums[k] <= 11 ? 'low' : 'mid');
+    });
+    return { scores: sums, levels: levels, typeKey: decideType(levels) };
+  }
+
+  // 只用「高 / 中 / 低」三档做判定，与剖面显示的档位完全一致。
+  function decideType(L) {
+    if (L.A === 'high' && L.B === 'high' && L.D === 'high') return 'hotspring';
+    if (L.A === 'high' && L.D === 'low') return 'jar';
+    if (L.A === 'high' && L.B === 'low') return 'dish';
+    if (L.A !== 'high' && L.C === 'high') return 'cloche';
+    if (L.A !== 'high' && L.B === 'high') return 'deeppool';
+    if (L.A === 'low') return 'vase';
+    return 'pot';
+  }
+
+  /* ============================================================
+     结果页
+     ============================================================ */
+
+  function renderResult(res) {
+    var t = TYPES[res.typeKey];
+
+    $('result-art').innerHTML = vesselSVG(res.typeKey);
+    $('result-no').textContent = '容器 ' + t.no + ' / 07';
+    $('result-name').textContent = t.name;
+    $('result-tag').textContent = t.tag;
+    $('result-summary').textContent = t.summary;
+
+    var barsHtml = '';
+    ['A', 'B', 'C', 'D'].forEach(function (k) {
+      var d = DIMS[k];
+      var v = res.scores[k];
+      var lv = res.levels[k];
+      var pct = Math.round((v - 5) / 15 * 100);
+      barsHtml += '<div class="bar-row k-' + k + '">'
+        + '<div class="bar-head">'
+        + '<span class="bar-name">' + d.title + '</span>'
+        + '<span class="bar-sub">' + d.sub + '</span>'
+        + '<span class="bar-val">' + v + '<i> / 20</i></span>'
+        + '</div>'
+        + '<div class="bar-track"><div class="bar-fill" data-pct="' + pct + '"></div></div>'
+        + '<p class="bar-note"><span class="lv lv-' + lv + '">' + LV_TEXT[lv] + '</span>' + d.levels[lv] + '</p>'
+        + '</div>';
+    });
+    $('bars').innerHTML = barsHtml;
+
+    $('result-body').innerHTML = t.body.map(function (p) {
+      return '<p class="body-p">' + p + '</p>';
+    }).join('');
+
+    $('result-gifts').innerHTML = t.gifts.map(function (x) { return '<li>' + x + '</li>'; }).join('');
+    $('result-stuck').innerHTML = t.stuck.map(function (x) { return '<li>' + x + '</li>'; }).join('');
+    $('result-actions').innerHTML = t.actions.map(function (x) { return '<li>' + x + '</li>'; }).join('');
+    $('result-quote').textContent = t.quote;
+
+    $('result-disclaimer').innerHTML = '关于这个结果：<b>本测试为原创娱乐自评</b>，未经心理测量学检验，'
+      + '不用于诊断依恋类型、人格或任何心理健康状况，也不构成心理咨询或医疗建议。'
+      + '它只描述此刻的你，不描述永远的你。<br>'
+      + '若你正经历持续的情绪困扰，请寻求专业心理服务。';
+
+    // 进度条动画
+    var bars = $('bars').querySelectorAll('.bar-fill');
+    for (var i = 0; i < bars.length; i++) { bars[i].style.width = '0%'; }
+    var paint = function () {
+      for (var j = 0; j < bars.length; j++) {
+        bars[j].style.width = bars[j].getAttribute('data-pct') + '%';
+      }
+    };
+    // 先排一帧再赋值，让过渡从 0 开始；若动画帧未推进，延时兜底直接落到终值
+    requestAnimationFrame(function () { requestAnimationFrame(paint); });
+    setTimeout(paint, 450);
+  }
+
+  function resultText(res) {
+    var t = TYPES[res.typeKey];
+    var lines = [];
+    lines.push('我的情绪容器是：' + t.name + '（' + t.tag + '）');
+    lines.push(t.summary);
+    lines.push('');
+    lines.push('容器剖面：开口度 ' + res.scores.A + '/20，纵深 ' + res.scores.B + '/20，壁厚 ' + res.scores.C + '/20，底座 ' + res.scores.D + '/20');
+    lines.push('');
+    lines.push('可以试试：');
+    t.actions.forEach(function (a, i) { lines.push((i + 1) + '. ' + a); });
+    lines.push('');
+    lines.push(t.quote);
+    lines.push('—— 情绪容器测试｜你容纳爱意的形状（娱乐自评，非心理诊断）');
+    return lines.join('\n');
+  }
+
+  function copyResult() {
+    if (!lastResult) return;
+    var text = resultText(lastResult);
+    var done = function () {
+      var btn = $('btn-copy');
+      var old = btn.textContent;
+      btn.textContent = '已复制 ✓';
+      setTimeout(function () { btn.textContent = old; }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopy(text, done); });
+    } else {
+      fallbackCopy(text, done);
+    }
+  }
+
+  function fallbackCopy(text, cb) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    if (ok) cb(); else toast('复制失败，可以手动选取文本');
+  }
+
+  /* ============================================================
+     事件绑定
+     ============================================================ */
+
+  function startQuiz(fresh) {
+    if (fresh) {
+      answers = new Array(N).fill(null);
+      index = 0;
+      lastResult = null;
+    }
+    setView('quiz');
+    renderQuestion(true);
+  }
+
+  $('btn-start').addEventListener('click', function () { startQuiz(true); });
+
+  els.options.addEventListener('click', function (e) {
+    var btn = e.target.closest('.option');
+    if (!btn) return;
+    select(Number(btn.getAttribute('data-opt')));
+  });
+
+  els.dots.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-jump]');
+    if (!btn) return;
+    go(Number(btn.getAttribute('data-jump')));
+  });
+
+  els.alert.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-jump]');
+    if (!btn) return;
+    go(Number(btn.getAttribute('data-jump')));
+  });
+
+  els.prev.addEventListener('click', function () { if (index > 0) go(index - 1); });
+  els.next.addEventListener('click', function () {
+    if (index === N - 1) { submit(); } else { go(index + 1); }
+  });
+  els.quick.addEventListener('click', function () { submit(); });
+
+  document.addEventListener('keydown', function (e) {
+    if (!views.quiz.classList.contains('is-active')) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea') return;
+    if (/^[1-4]$/.test(e.key)) {
+      e.preventDefault();
+      select(Number(e.key) - 1);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      if (index < N - 1) go(index + 1);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      if (index > 0) go(index - 1);
+    }
+  });
+
+  $('btn-edit').addEventListener('click', function () {
+    setView('quiz');
+    index = 0;
+    renderQuestion(true);
+    toast('答案都还在，改完点「更新我的结果」');
+  });
+
+  $('btn-copy').addEventListener('click', copyResult);
+
+  $('btn-restart').addEventListener('click', function () {
+    answers = new Array(N).fill(null);
+    lastResult = null;
+    index = 0;
+    startQuiz(true);
+  });
+
+  $('btn-home').addEventListener('click', function () { setView('home'); });
+
+  $('brand-home').addEventListener('click', function (e) {
+    e.preventDefault();
+    setView('home');
+  });
+
+  // 顶部导航 / 首页内锚点：不在首页时先回首页再滚动
+  function scrollToSection(id) {
+    var target = document.getElementById(id);
+    if (!target) return;
+    if (!views.home.classList.contains('is-active')) {
+      setView('home');
+      setTimeout(function () { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+    } else {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('[data-scroll]');
+    if (!link) return;
+    e.preventDefault();
+    scrollToSection(link.getAttribute('data-scroll'));
+  });
+
+  /* ============================================================
+     初始化
+     ============================================================ */
+
+  renderTypeGrid();
+  renderDots();
+  renderQuestion(false);
+})();
+</script>
+</body>
+</html>
